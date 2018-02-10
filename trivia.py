@@ -7,19 +7,10 @@ class Game:
         self.purses = [0] * 6
         self.in_penalty_box = [0] * 6
 
-        self.pop_questions = []
-        self.science_questions = []
-        self.sports_questions = []
-        self.rock_questions = []
+        self.questions = {'Pop': 0, 'Science': 0, 'Sports': 0, 'Rock': 0}
 
         self.current_player = 0
         self.is_getting_out_of_penalty_box = False
-
-        for i in range(50):
-            self.pop_questions.append("Pop Question %s" % i)
-            self.science_questions.append("Science Question %s" % i)
-            self.sports_questions.append("Sports Question %s" % i)
-            self.rock_questions.append("Rock Question %s" % i)
 
     def is_playable(self):
         return self.how_many_players >= 2
@@ -72,10 +63,8 @@ class Game:
             self._ask_question()
 
     def _ask_question(self):
-        if self._current_category == 'Pop': print(self.pop_questions.pop(0))
-        if self._current_category == 'Science': print(self.science_questions.pop(0))
-        if self._current_category == 'Sports': print(self.sports_questions.pop(0))
-        if self._current_category == 'Rock': print(self.rock_questions.pop(0))
+        print(self._current_category + " Question %s" % self.questions[self._current_category])
+        self.questions[self._current_category] = self.questions[self._current_category] + 1
 
     @property
     def _current_category(self):
