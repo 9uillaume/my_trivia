@@ -64,14 +64,12 @@ class Game:
 
     def _ask_question(self):
         print(self._current_category + " Question %s" % self.questions[self._current_category])
-        self.questions[self._current_category] = self.questions[self._current_category] + 1
+        self.questions[self._current_category] += 1
 
     @property
     def _current_category(self):
-        if self.places[self.current_player] in [0,4,8]: return 'Pop'
-        if self.places[self.current_player] in [1,5,9]: return 'Science'
-        if self.places[self.current_player] in [2,6,10]: return 'Sports'
-        return 'Rock'
+        categories = list(self.questions.keys())
+        return categories[self.places[self.current_player] % len(self.questions)]
 
     def was_correctly_answered(self):
         if self.in_penalty_box[self.current_player]:
@@ -93,10 +91,7 @@ class Game:
                 if self.current_player == len(self.players): self.current_player = 0
                 return True
 
-
-
         else:
-
             print("Answer was corrent!!!!")
             self.purses[self.current_player] += 1
             print(self.players[self.current_player] + \
