@@ -17,3 +17,43 @@ def test_rock_questions_content():
     test_game = Game()
     for q in range(50):
         assert test_game.rock_questions[q] == "Rock Question %s" % q
+
+# should be Pop for 0 4 8
+def test_current_category_is_pop():
+    test_game = Game()
+    test_game.add('Chet')
+    test_game.add('Pat')
+    test_game.roll(4)
+    for i in range(2):
+        test_game.roll(4)
+        assert test_game._current_category == "Pop"
+
+# should be Science for 1 5 9
+def test_current_category_is_science():
+    test_game = Game()
+    test_game.add('Chet')
+    test_game.add('Pat')
+    test_game.roll(5)
+    for i in range(2):
+        test_game.roll(4)
+        assert test_game._current_category == "Science"
+
+# should be Sports for 2 6 10
+def test_current_category_is_sports():
+    test_game = Game()
+    test_game.add('Chet')
+    test_game.add('Pat')
+    test_game.roll(6)
+    for i in range(2):
+        test_game.roll(4)
+        assert test_game._current_category == "Sports"
+
+# should be Rock for 3 7 11
+def test_current_category_is_rock():
+    test_game = Game()
+    test_game.add('Chet')
+    test_game.add('Pat')
+    test_game.roll(7)
+    for i in range(2):
+        test_game.roll(4)
+        assert test_game._current_category == "Rock"
